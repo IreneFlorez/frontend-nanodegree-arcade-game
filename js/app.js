@@ -1,27 +1,23 @@
 class Figure {
-    constructor (x, y, speed){
+    constructor (x, y, sprite){
         this.x      = x;
         this.y      = y;
-        this.speed  = speed;
+        this.sprite  = sprite;
     }
+    render () {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
+};
 
 // Player class - update(), render() and handleInput() method.
 class Player extends Figure{
-    constructor(sprite){
-    super();
-    this.sprite = 'images/char-boy.png';
-}}
-
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite, this.x, this.y));
-};
-
-Player.prototype.update = function(x, y) {
-    if ( x === undefined || y === undefined ) { return; }
-    this.x += x;
-    this.y += y;
-};
+    constructor(x, y, sprite){
+        super(x, y, sprite);
+}
+    update () {
+        //
+    }
+}
 
 Player.prototype.handleInput = function(keyPress) {
   //if (direction == 'up')   
@@ -44,44 +40,46 @@ document.addEventListener('keyup', function(e) {
 
 // Enemy class - update() with dt parameter, render() and handleInput() method.
 class Enemy extends Figure{
-    constructor(sprite){
-        super();
-        this.sprite = 'images/enemy-bug.png';
-}}
+    constructor(x, y, sprite, speed){
+        super(x, y, sprite);
 
-Enemy.prototype.update = function(dt) {
+        this.speed = speed;
+    }
+    update (dt) {
+        this.x += this.speed * dt;
+    }
+    //function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed across devices
-    this.x += this.speed * dt;
-};
+    //
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-const allEnemies = []; //creates an array of Enemies
+const allEnemies = [
+    new Enemy(300, 100,'images/enemy-bug.png', 150)
+]; //creates an array of Enemies
 
-    allEnemies.forEach(function(enemy) {
-    if(player.x >= enemy.x - 25 && player.x <= enemy.x + 25) {
-        if(player.y >= enemy.y - 25 && player.y <= enemy.y + 25) {
-            player.reset();
-            }
-        }
-    });
+    //allEnemies.forEach(function(enemy) {
+    //if(player.x >= enemy.x - 25 && player.x <= enemy.x + 25) {
+        //if(player.y >= enemy.y - 25 && player.y <= enemy.y + 25) {
+            //player.reset();
+            //}
+        //}
+    //});
 
 // Enemies
-const enemy = new Enemy();
+
 
 // Place the player object in a variable called player
-const player = new Player();
+const player = new Player(400, 200, 'images/char-boy.png');
 
 //this function will DISPLAY Enemies:
-(function displayEnemies() {
-    allEnemies.push(new Enemy(0, 50));
-    allEnemies.push(new Enemy(0, 140));
-    allEnemies.push(new Enemy(0, 230));
-}());
+//(function displayEnemies() {
+    //allEnemies.push(new Enemy(0, 50));
+    //allEnemies.push(new Enemy(0, 140));
+    //allEnemies.push(new Enemy(0, 230));
+//}());
 
-// Draw the enemy on the screen
-//Enemy.prototype.render = function() {
-  //ctx.drawImage(Resources.get(this.sprite, this.x, this.y));
-//};
+
 
