@@ -46,8 +46,8 @@ class Player extends Figure{
         }
     }
     reset () {
-        this.x = 100;
-        this.y = 400;
+        this.x = -100;
+        this.speed=100+Math.floor(Math.random()*256);
     }
 }    
 // Enemy class: update() with dt parameter and handleInput() method
@@ -58,9 +58,13 @@ class Enemy extends Figure{
     }
     update (dt) { //multiply any movement by the dt parameter to ensure the game runs at the same speed across devices
         this.x += this.speed * dt;
+        this.collision();
+        if(this.x >550) { //enemy reaches end of screen, position reset
+            this.reset(); 
+        }
     }
     handleInput () {
-        //not needed at present.
+        
     }
     reset () {
         this.x = 100;
@@ -71,20 +75,20 @@ class Enemy extends Figure{
             if(player.y >= this.y - 35 && player.y <= this.y + 35) {
                 player.reset();
                 this.reset();
-                console.log("hit");
-                }
             }
         }
+    }
+
 }
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [
-    new Enemy(100, 100,'images/enemy-bug.png', 150),
-    new Enemy(280, 180,'images/enemy-bug.png', 150),
-    new Enemy(100, 300,'images/enemy-bug.png', 150),
+    //new Enemy(100, 100,'images/enemy-bug.png', 150),
+    //new Enemy(280, 180,'images/enemy-bug.png', 150),
+    //new Enemy(100, 300,'images/enemy-bug.png', 150),
 ]; 
 
 // Now instantiate your objects.
-const displayEnemies = function(Enemy) {
+const displayEnemies = function(x, y, 'images/enemy-bug.png', speed) {
     enemy = new Enemy(0, 100, 100+ Math.floor(Math.random() * 512));
     allEnemies.push(enemy);
 }
