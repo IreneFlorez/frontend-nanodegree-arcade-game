@@ -64,7 +64,7 @@ class Enemy extends Figure{
         }
     }
     handleInput () {
-        
+        //not needed at present
     }
     reset () {
         //this.x = 100;
@@ -80,7 +80,6 @@ class Enemy extends Figure{
             }
         }
     }
-
 }
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [
@@ -88,13 +87,11 @@ const allEnemies = [
     new Enemy(280, 180,'images/enemy-bug.png', 150),
     new Enemy(100, 300,'images/enemy-bug.png', 150),
 ]; 
-
 // Now instantiate your objects.
 const displayEnemies = function() {
     enemy = new Enemy(0, 100, 'images/enemy-bug.png', (100+ Math.floor(Math.random() * 512)));
     allEnemies.push(enemy);
 }
-
 displayEnemies();
 // Place the player object in a variable called player
 const player = new Player(400, 390, 'images/char-boy.png');
