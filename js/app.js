@@ -46,8 +46,8 @@ class Player extends Figure{
         }
     }
     reset () {
-        this.x = -100;
-        this.speed=100+Math.floor(Math.random()*256);
+        this.x = 50;
+        this.y = 390;
     }
 }    
 // Enemy class: update() with dt parameter and handleInput() method
@@ -67,8 +67,10 @@ class Enemy extends Figure{
         
     }
     reset () {
-        this.x = 100;
-        this.y = 100;
+        //this.x = 100;
+        //this.y = 100;
+        this.x = -100;
+        this.speed=100+Math.floor(Math.random()*256);
     }
     collision(){
         if(player.x >= this.x - 35 && player.x <= this.x + 35) {
@@ -82,15 +84,17 @@ class Enemy extends Figure{
 }
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [
-    //new Enemy(100, 100,'images/enemy-bug.png', 150),
-    //new Enemy(280, 180,'images/enemy-bug.png', 150),
-    //new Enemy(100, 300,'images/enemy-bug.png', 150),
+    //helpnew Enemy(100, 100,'images/enemy-bug.png', 150),
+    new Enemy(280, 180,'images/enemy-bug.png', 150),
+    new Enemy(100, 300,'images/enemy-bug.png', 150),
 ]; 
 
 // Now instantiate your objects.
-const displayEnemies = function(x, y, 'images/enemy-bug.png', speed) {
-    enemy = new Enemy(0, 100, 100+ Math.floor(Math.random() * 512));
+const displayEnemies = function() {
+    enemy = new Enemy(0, 100, 'images/enemy-bug.png', (100+ Math.floor(Math.random() * 512)));
     allEnemies.push(enemy);
 }
+
+displayEnemies();
 // Place the player object in a variable called player
 const player = new Player(400, 390, 'images/char-boy.png');
