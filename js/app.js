@@ -30,16 +30,16 @@ class Player extends Figure{
     handleInput (allowedKeys) {
         this.allowedKeys = allowedKeys;
         if(this.allowedKeys === 'left' && this.x > 0) { //player isn't on left edge
-            this.x = this.x - 90;
+            this.x -=  50;
         }
         if(this.allowedKeys === 'right' && this.x < 400) { //player isn't on right edge
-            this.x = this.x + 90;
+            this.x += 50;
         }
-        if(this.allowedKeys === 'up' && this.y > 0) {
-            this.y = this.y - 90;
+        if(this.allowedKeys === 'up' && this.y > 10) {
+            this.y -= 50;
         }
         if(this.allowedKeys === 'down' && this.y < 400) {
-            this.y = this.y + 90;
+            this.y += 50;
         }
         if(this.y < 0) { //player reaches water, position reset
             this.reset();
