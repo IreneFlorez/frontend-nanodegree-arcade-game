@@ -30,10 +30,10 @@ class Player extends Figure{
     handleInput (allowedKeys) {
         this.allowedKeys = allowedKeys;
         if(this.allowedKeys === 'left' && this.x > 0) { //player isn't on left edge
-            this.x = this.x - 100;
+            this.x = this.x - 90;
         }
         if(this.allowedKeys === 'right' && this.x < 400) { //player isn't on right edge
-            this.x = this.x + 100;
+            this.x = this.x + 90;
         }
         if(this.allowedKeys === 'up' && this.y > 0) {
             this.y = this.y - 90;
@@ -49,13 +49,6 @@ class Player extends Figure{
         this.x = 100;
         this.y = 400;
     }
-    //allEnemies.forEach(function(enemy) {
-    //if(self.x >= enemy.x - 25 && self.x <= enemy.x + 25) {
-        //if(self.y >= enemy.y - 25 && self.y <= enemy.y + 25) {
-            //self.reset();
-            //}
-        //}
-    //});
 }    
 // Enemy class: update() with dt parameter and handleInput() method
 class Enemy extends Figure{
@@ -69,21 +62,31 @@ class Enemy extends Figure{
     handleInput () {
         //not needed at present.
     }
-    collision(){
-        //
+    reset () {
+        this.x = 100;
+        this.y = 100;
     }
+    collision(){
+        if(player.x >= this.x - 35 && player.x <= this.x + 35) {
+            if(player.y >= this.y - 35 && player.y <= this.y + 35) {
+                player.reset();
+                this.reset();
+                console.log("hit");
+                }
+            }
+        }
 }
-// Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [
-    //new Enemy(100, 100,'images/enemy-bug.png', 150),
-    //new Enemy(280, 180,'images/enemy-bug.png', 150),
-    //new Enemy(100, 300,'images/enemy-bug.png', 150),
+    new Enemy(100, 100,'images/enemy-bug.png', 150),
+    new Enemy(280, 180,'images/enemy-bug.png', 150),
+    new Enemy(100, 300,'images/enemy-bug.png', 150),
 ]; 
-    displayEnemies() {
-    allEnemies.push(new Enemy(0, 50,'images/enemy-bug.png', 150));
-    allEnemies.push(new Enemy(0, 140));
-    allEnemies.push(new Enemy(0, 230));
-    }
+
+// Now instantiate your objects.
+const displayEnemies = function(Enemy) {
+    enemy = new Enemy(0, 100, 100+ Math.floor(Math.random() * 512));
+    allEnemies.push(enemy);
+}
 // Place the player object in a variable called player
-const player = new Player(100, 400, 'images/char-boy.png');
+const player = new Player(400, 390, 'images/char-boy.png');
