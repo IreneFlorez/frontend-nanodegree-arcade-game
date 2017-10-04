@@ -12,7 +12,7 @@ Download the repository:
 * Double-click index.html to open the game in your browser.
 
 Gameplay:
-* Press enter to start the game.
+* The game starts automatically once the page is loaded.
 * Use the arrow keys to move.
 * The objective is to reach the top of the water and collect gems to score.
 * Each time you reach the top of the water, the game starts over.
